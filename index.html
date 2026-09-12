@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>WalaDown - Baixador de Vídeos</title>
+
+<link rel="icon" type="image/png" href="/static/logo.png">
+<link rel="stylesheet" href="/static/style.css">
+
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="logo">
+    <span class="logo-icon">▶</span>
+    <span>Wala<span>Down</span></span>
+</div>
+
+<nav>
+    <a href="#inicio">Início</a>
+    <a href="#como-funciona">Como funciona</a>
+</nav>
+
+
+</header>
+
+<main id="inicio">
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ⚡ Rápido, simples e gratuito
+        </div>
+
+
+        <h1>
+            Baixe seus vídeos
+            <span>de forma simples.</span>
+        </h1>
+
+
+        <p class="subtitle">
+            Cole o link do vídeo, escolha a qualidade e faça
+            o download em poucos segundos.
+        </p>
+
+
+        <div class="download-box">
+
+            <div class="url-container">
+
+                <span class="link-icon">🔗</span>
+
+                <input
+                    type="text"
+                    id="video-url"
+                    placeholder="Cole aqui o link do vídeo..."
+                >
+
+                <button
+                    class="clear-btn"
+                    onclick="limparUrl()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <button
+                class="analyze-btn"
+                onclick="analisarVideo()"
+            >
+                Analisar vídeo
+                <span>→</span>
+            </button>
+
+        </div>
+
+
+        <!-- ==========================================
+             RESULTADO DO VÍDEO
+             ========================================== -->
+
+        <div
+            class="video-result"
+            id="video-result"
+        >
+
+            <div class="thumbnail">
+
+                <img
+                    id="video-thumbnail"
+                    src=""
+                    alt="Miniatura do vídeo"
+                >
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="video-info">
+
+                <span class="video-label">
+                    VÍDEO ENCONTRADO
+                </span>
+
+                <h2 id="video-title">
+                    Título do vídeo
+                </h2>
+
+                <div class="video-meta">
+                    <span>▶ YouTube</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             OPÇÕES DE DOWNLOAD
+             ========================================== -->
+
+        <div
+            class="options"
+            id="download-options"
+        >
+
+            <h3>
+                Escolha o formato
+            </h3>
+
+
+            <div class="format-grid">
+
+
+                <!-- 720P -->
+
+                <button
+                    class="format-card active"
+                    data-format="720p"
+                    onclick="selecionarFormato(this)"
+                >
+
+                    <div class="format-icon">
+                        🎬
+                    </div>
+
+                    <div>
+                        <strong>720p</strong>
+                        <small>HD + Áudio</small>
+                    </div>
+
+                </button>
+
+
+                <!-- 1080P -->
+
+                <button
+                    class="format-card"
+                    data-format="1080p"
+                    onclick="selecionarFormato(this)"
+                >
+
+                    <div class="format-icon">
+                        🎬
+                    </div>
+
+                    <div>
+                        <strong>1080p</strong>
+                        <small>Full HD + Áudio</small>
+                    </div>
+
+                </button>
+
+
+                <!-- 360P -->
+
+                <button
+                    class="format-card"
+                    data-format="360p"
+                    onclick="selecionarFormato(this)"
+                >
+
+                    <div class="format-icon">
+                        📱
+                    </div>
+
+                    <div>
+                        <strong>360p</strong>
+                        <small>Economiza dados</small>
+                    </div>
+
+                </button>
+
+
+                <!-- MP3 -->
+
+                <button
+                    class="format-card"
+                    data-format="mp3"
+                    onclick="selecionarFormato(this)"
+                >
+
+                    <div class="format-icon audio">
+                        🎵
+                    </div>
+
+                    <div>
+                        <strong>MP3</strong>
+                        <small>Somente áudio</small>
+                    </div>
+
+                </button>
+
+            </div>
+
+
+            <!-- ==========================================
+                 BOTÃO DOWNLOAD
+                 ========================================== -->
+
+            <button
+                type="button"
+                class="download-btn"
+                onclick="baixarVideo(event)"
+            >
+
+                <span>⬇</span>
+                Baixar agora
+
+            </button>
+
+
+            <!-- ==========================================
+                 BARRA DE PROGRESSO
+                 ========================================== -->
+
+            <div
+                class="download-progress"
+                id="download-progress"
+            >
+
+                <div class="progress-header">
+
+                    <span>
+                        Progresso do download
+                    </span>
+
+                    <strong id="progress-percent">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="progress-fill"
+                    ></div>
+
+                </div>
+
+
+                <div class="progress-info">
+
+                    <p id="progress-message">
+                        Iniciando download...
+                    </p>
+
+                    <span id="progress-status">
+                        Preparando servidor...
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     COMO FUNCIONA
+     ========================================== -->
+
+<section
+    class="how-it-works"
+    id="como-funciona"
+>
+
+    <div class="section-title">
+
+        <span>
+            COMO FUNCIONA
+        </span>
+
+        <h2>
+            Baixe em apenas 3 passos
+        </h2>
+
+    </div>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Cole o link
+            </h3>
+
+            <p>
+                Copie o endereço do vídeo e cole
+                no campo acima.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Escolha a qualidade
+            </h3>
+
+            <p>
+                Escolha entre vídeo HD, Full HD
+                ou somente áudio.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Baixe
+            </h3>
+
+            <p>
+                Clique em baixar e pronto.
+                Seu arquivo estará disponível.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer>
+
+
+<div class="logo">
+
+    <span class="logo-icon">
+        ▶
+    </span>
+
+    Video<span>Down</span>
+
+</div>
+
+
+<p>
+    © 2026 Moisés Pereira • Todos os direitos reservados.
+</p>
+
+
+</footer>
+
+<script>
+
+// ==========================================
+// CONFIGURAÇÃO DA API
+// ==========================================
+
+const API_URL = "http://127.0.0.1:8000";
+
+let formatoSelecionado = "720p";
+
+
+// ==========================================
+// SELECIONAR FORMATO
+// ==========================================
+
+function selecionarFormato(elemento) {
+
+    if (elemento.disabled) {
+        return;
+    }
+
+    document
+        .querySelectorAll(".format-card")
+        .forEach(card => {
+
+            card.classList.remove("active");
+
+        });
+
+
+    elemento.classList.add("active");
+
+
+    formatoSelecionado =
+        elemento.dataset.format;
+
+}
+
+
+// ==========================================
+// LIMPAR URL
+// ==========================================
+
+function limparUrl() {
+
+    document.getElementById("video-url").value = "";
+
+
+    document
+        .getElementById("video-result")
+        .classList.remove("show");
+
+
+    document
+        .getElementById("download-options")
+        .classList.remove("show");
+
+
+    const progress =
+        document.getElementById("download-progress");
+
+
+    if (progress) {
+
+        progress.classList.remove("show");
+
+    }
+
+}
+
+
+// ==========================================
+// ANALISAR VÍDEO
+// ==========================================
+
+async function analisarVideo() {
+
+    const url =
+        document
+            .getElementById("video-url")
+            .value
+            .trim();
+
+
+    if (!url) {
+
+        alert(
+            "Cole o link do vídeo primeiro."
+        );
+
+        return;
+    }
+
+
+    const botao =
+        document.querySelector(".analyze-btn");
+
+
+    botao.disabled = true;
+
+    botao.innerHTML =
+        "Analisando...";
+
+
+    try {
+
+        const resposta =
+            await fetch(
+                API_URL + "/api/analisar",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        url: url
+                    })
+                }
+            );
+
+
+        const data =
+            await resposta.json();
+
+
+        if (
+            !resposta.ok ||
+            !data.sucesso
+        ) {
+
+            throw new Error(
+                data.detail ||
+                data.mensagem ||
+                "Não foi possível analisar o vídeo."
+            );
+
+        }
+
+
+        // Título
+
+        document
+            .getElementById("video-title")
+            .textContent =
+                data.titulo;
+
+
+        // Thumbnail
+
+        document
+            .getElementById("video-thumbnail")
+            .src =
+                data.thumbnail;
+
+
+        // Mostra resultado
+
+        document
+            .getElementById("video-result")
+            .classList.add("show");
+
+
+        // Mostra opções
+
+        document
+            .getElementById("download-options")
+            .classList.add("show");
+
+
+        // Atualiza formatos
+
+        atualizarFormatos(
+            data.formatos
+        );
+
+
+    } catch (erro) {
+
+        console.error(erro);
+
+
+        alert(
+            "Erro ao analisar o vídeo:\n\n" +
+            erro.message
+        );
+
+
+    } finally {
+
+        botao.disabled = false;
+
+        botao.innerHTML =
+            'Analisar vídeo <span>→</span>';
+
+    }
+
+}
+
+
+// ==========================================
+// ATUALIZAR FORMATOS DISPONÍVEIS
+// ==========================================
+
+function atualizarFormatos(formatos) {
+
+    document
+        .querySelectorAll(".format-card")
+        .forEach(card => {
+
+            const formato =
+                card.dataset.format;
+
+
+            const disponivel =
+                formatos.includes(formato);
+
+
+            card.disabled =
+                !disponivel;
+
+
+            if (!disponivel) {
+
+                card.style.opacity = "0.4";
+
+                card.style.cursor =
+                    "not-allowed";
+
+            } else {
+
+                card.style.opacity = "";
+
+                card.style.cursor = "";
+
+            }
+
+        });
+
+
+    // Se o formato selecionado não estiver disponível,
+    // seleciona automaticamente o primeiro disponível.
+
+    if (
+        !formatos.includes(
+            formatoSelecionado
+        )
+    ) {
+
+        const primeiroFormato =
+            formatos.find(formato =>
+                document.querySelector(
+                    `.format-card[data-format="${formato}"]`
+                )
+            );
+
+
+        if (primeiroFormato) {
+
+            const elemento =
+                document.querySelector(
+                    `.format-card[data-format="${primeiroFormato}"]`
+                );
+
+
+            selecionarFormato(
+                elemento
+            );
+
+        }
+
+    }
+
+}
+
+
+// ==========================================
+// BAIXAR VÍDEO
+// ==========================================
+
+async function baixarVideo(event) {
+
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+
+    const url =
+        document
+            .getElementById("video-url")
+            .value
+            .trim();
+
+
+    if (!url) {
+
+        alert(
+            "Cole o link do vídeo primeiro."
+        );
+
+        return;
+    }
+
+
+    const botao =
+        document.querySelector(
+            ".download-btn"
+        );
+
+
+    // Elementos da barra de progresso
+
+    const progressContainer =
+        document.getElementById(
+            "download-progress"
+        );
+
+
+    const progressFill =
+        document.getElementById(
+            "progress-fill"
+        );
+
+
+    const progressPercent =
+        document.getElementById(
+            "progress-percent"
+        );
+
+
+    const progressMessage =
+        document.getElementById(
+            "progress-message"
+        );
+
+
+    const progressStatus =
+        document.getElementById(
+            "progress-status"
+        );
+
+
+    // Bloqueia botão
+
+    botao.disabled = true;
+
+
+    botao.innerHTML =
+        '<span>⏳</span> Processando...';
+
+
+    // Mostra barra
+
+    if (progressContainer) {
+
+        progressContainer.classList.add(
+            "show"
+        );
+
+
+        progressFill.style.width =
+            "0%";
+
+
+        progressPercent.textContent =
+            "0%";
+
+
+        progressMessage.textContent =
+            "Iniciando download...";
+
+
+        progressStatus.textContent =
+            "Preparando servidor...";
+
+    }
+
+
+    try {
+
+        console.log(
+            "Iniciando download..."
+        );
+
+
+        console.log(
+            "URL:",
+            url
+        );
+
+
+        console.log(
+            "Formato:",
+            formatoSelecionado
+        );
+
+
+        // ==========================================
+        // 1. INICIA DOWNLOAD NO BACKEND
+        // ==========================================
+
+        const resposta =
+            await fetch(
+                API_URL + "/api/download",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        url: url,
+
+                        formato:
+                            formatoSelecionado
+
+                    })
+                }
+            );
+
+
+        console.log(
+            "Status:",
+            resposta.status
+        );
+
+
+        const data =
+            await resposta.json();
+
+
+        console.log(
+            "Resposta:",
+            data
+        );
+
+
+        if (
+            !resposta.ok ||
+            !data.sucesso
+        ) {
+
+            throw new Error(
+                data.detail ||
+                data.mensagem ||
+                "Não foi possível iniciar o download."
+            );
+
+        }
+
+
+        const id =
+            data.id;
+
+
+        console.log(
+            "ID do download:",
+            id
+        );
+
+
+        // ==========================================
+        // 2. ACOMPANHA O PROGRESSO
+        // ==========================================
+
+        let concluido = false;
+
+
+        while (!concluido) {
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        500
+                    )
+            );
+
+
+            const progressoResposta =
+                await fetch(
+                    API_URL +
+                    "/api/progresso/" +
+                    id
+                );
+
+
+            if (
+                !progressoResposta.ok
+            ) {
+
+                throw new Error(
+                    "Não foi possível consultar o progresso."
+                );
+
+            }
+
+
+            const progresso =
+                await progressoResposta.json();
+
+
+            console.log(
+                "Progresso:",
+                progresso
+            );
+
+
+            // ==========================================
+            // ATUALIZA BARRA
+            // ==========================================
+
+            const porcentagem =
+                Number(
+                    progresso.progresso
+                ) || 0;
+
+
+            if (progressFill) {
+
+                progressFill.style.width =
+                    porcentagem + "%";
+
+            }
+
+
+            if (progressPercent) {
+
+                progressPercent.textContent =
+                    porcentagem + "%";
+
+            }
+
+
+            if (progressMessage) {
+
+                progressMessage.textContent =
+                    progresso.mensagem ||
+                    "Processando...";
+
+            }
+
+
+            if (progressStatus) {
+
+                progressStatus.textContent =
+                    progresso.etapa ||
+                    "Processando...";
+
+            }
+
+
+            // ==========================================
+            // VERIFICA ERRO
+            // ==========================================
+
+            if (
+                progresso.status ===
+                "erro"
+            ) {
+
+                throw new Error(
+                    progresso.erro ||
+                    "Erro durante o download."
+                );
+
+            }
+
+
+            // ==========================================
+            // VERIFICA CONCLUSÃO
+            // ==========================================
+
+            if (
+                progresso.status ===
+                "concluido"
+            ) {
+
+                concluido = true;
+
+
+                if (progressFill) {
+
+                    progressFill.style.width =
+                        "100%";
+
+                }
+
+
+                if (progressPercent) {
+
+                    progressPercent.textContent =
+                        "100%";
+
+                }
+
+
+                if (progressMessage) {
+
+                    progressMessage.textContent =
+                        "Download concluído!";
+
+                }
+
+
+                if (progressStatus) {
+
+                    progressStatus.textContent =
+                        "Preparando seu arquivo...";
+
+                }
+
+            }
+
+        }
+
+
+        // ==========================================
+        // 3. ENTREGA ARQUIVO AO NAVEGADOR
+        // ==========================================
+
+        if (progressStatus) {
+
+            progressStatus.textContent =
+                "Enviando arquivo para download...";
+
+        }
+
+
+        console.log(
+            "Solicitando arquivo:",
+            id
+        );
+
+
+      const link = document.createElement("a");
+
+link.href = API_URL + "/api/arquivo/" + id;
+link.download = "";
+link.style.display = "none";
+
+document.body.appendChild(link);
+
+link.click();
+
+setTimeout(() => {
+    document.body.removeChild(link);
+}, 100);
+
+        console.log(
+            "Download enviado ao navegador."
+        );
+
+
+        if (progressStatus) {
+
+            progressStatus.textContent =
+                "Arquivo enviado para download!";
+
+        }
+
+
+    } catch (erro) {
+
+        console.error(
+            "ERRO NO DOWNLOAD:",
+            erro
+        );
+
+
+        if (progressMessage) {
+
+            progressMessage.textContent =
+                "Ocorreu um erro.";
+
+        }
+
+
+        if (progressStatus) {
+
+            progressStatus.textContent =
+                erro.message;
+
+        }
+
+
+        if (progressFill) {
+
+            progressFill.style.width =
+                "0%";
+
+        }
+
+
+        if (progressPercent) {
+
+            progressPercent.textContent =
+                "Erro";
+
+        }
+
+
+        alert(
+            "Erro durante o download:\n\n" +
+            erro.message
+        );
+
+
+    } finally {
+
+        botao.disabled = false;
+
+
+        botao.innerHTML =
+            '<span>⬇</span> Baixar agora';
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

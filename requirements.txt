@@ -1,0 +1,6 @@
+
+fastapi
+uvicorn[standard]
+pytubefix
+python-multipart
+

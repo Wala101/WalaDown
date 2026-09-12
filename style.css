@@ -1,0 +1,795 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #08090d;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+
+/* HEADER */
+
+.header {
+    width: 100%;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    border-bottom: 1px solid #202127;
+
+    background: #08090d;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+.logo span:last-child span {
+    color: #09a74b;
+}
+
+
+.logo-icon {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #30ff7f;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+}
+
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+
+nav a {
+    color: #9b9ca3;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+
+nav a:hover {
+    color: #ffffff;
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 720px;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 90px 20px 70px;
+}
+
+
+.hero-content {
+    width: 100%;
+    max-width: 850px;
+
+    text-align: center;
+}
+
+
+.badge {
+    display: inline-block;
+
+    padding: 8px 15px;
+
+    border: 1px solid #292b32;
+
+    border-radius: 30px;
+
+    color: #b4b5bc;
+
+    font-size: 12px;
+
+    margin-bottom: 25px;
+
+    background: #101116;
+}
+
+
+h1 {
+    font-size: clamp(40px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 22px;
+}
+
+
+h1 span {
+    color: #30ffb0;
+}
+
+
+.subtitle {
+    max-width: 580px;
+
+    margin: 0 auto 40px;
+
+    color: #92949d;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* DOWNLOAD BOX */
+
+.download-box {
+    width: 100%;
+
+    display: flex;
+
+    gap: 10px;
+
+    padding: 8px;
+
+    background: #111217;
+
+    border: 1px solid #292b32;
+
+    border-radius: 14px;
+}
+
+
+.url-container {
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 15px;
+
+    background: #191a20;
+
+    border-radius: 9px;
+}
+
+
+.link-icon {
+    margin-right: 10px;
+
+    color: #777982;
+}
+
+
+.url-container input {
+    width: 100%;
+
+    height: 50px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+
+.url-container input::placeholder {
+    color: #6e7078;
+}
+
+
+.clear-btn {
+    border: none;
+
+    background: transparent;
+
+    color: #70727a;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+.analyze-btn {
+    border: none;
+
+    padding: 0 24px;
+
+    border-radius: 9px;
+
+    background: rgb(21, 172, 134);
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.analyze-btn:hover {
+    background: #ff5147;
+
+    transform: translateY(-1px);
+}
+
+
+/* RESULTADO */
+
+.video-result {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 15px;
+
+    background: #111217;
+
+    border: 1px solid #292b32;
+
+    border-radius: 13px;
+
+    text-align: left;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.video-result.show {
+    display: flex;
+}
+
+
+.thumbnail {
+    width: 180px;
+
+    height: 100px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    background: #1b1c21;
+}
+
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.play-icon {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0,0,0,0.7);
+
+    font-size: 13px;
+}
+
+
+.video-info {
+    flex: 1;
+}
+
+
+.video-label {
+    font-size: 10px;
+
+    color: #ff3b30;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.video-info h2 {
+    font-size: 17px;
+
+    margin: 8px 0;
+}
+
+
+.video-meta {
+    color: #777982;
+
+    font-size: 12px;
+}
+
+
+/* OPÇÕES */
+
+.options {
+    display: none;
+
+    margin-top: 25px;
+
+    text-align: left;
+}
+
+
+.options.show {
+    display: block;
+}
+
+
+.options h3 {
+    font-size: 15px;
+
+    margin-bottom: 12px;
+}
+
+
+.format-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+
+.format-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px;
+
+    background: #111217;
+
+    border: 1px solid #292b32;
+
+    border-radius: 10px;
+
+    color: white;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.format-card:hover {
+    border-color: #484a53;
+}
+
+
+.format-card.active {
+    border-color: #ff3b30;
+
+    background: #1b1111;
+}
+
+
+.format-icon {
+    font-size: 22px;
+}
+
+
+.format-card strong {
+    display: block;
+
+    font-size: 14px;
+}
+
+
+.format-card small {
+    display: block;
+
+    color: #777982;
+
+    font-size: 10px;
+
+    margin-top: 3px;
+}
+
+
+/* DOWNLOAD */
+
+.download-btn {
+    width: 100%;
+
+    height: 55px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ff3b30;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.download-btn:hover {
+    background: #ff5147;
+
+    transform: translateY(-1px);
+}
+
+
+/* BARRA DE PROGRESSO */
+
+.download-progress {
+    display: none;
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 18px;
+
+    background: #111217;
+
+    border: 1px solid #292b32;
+
+    border-radius: 10px;
+
+    text-align: left;
+}
+
+
+.download-progress.show {
+    display: block;
+}
+
+
+.progress-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+
+.progress-header span {
+    color: #b4b5bc;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+#progress-percent {
+    color: #ff3b30;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.progress-bar {
+    width: 100%;
+
+    height: 9px;
+
+    overflow: hidden;
+
+    background: #202127;
+
+    border-radius: 20px;
+}
+
+
+.progress-fill {
+    width: 0%;
+
+    height: 100%;
+
+    background: #ff3b30;
+
+    border-radius: 20px;
+
+    transition: width 0.3s ease;
+}
+
+
+.progress-info {
+    margin-top: 10px;
+}
+
+
+#progress-message {
+    margin: 0 0 4px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+#progress-status {
+    color: #777982;
+
+    font-size: 11px;
+}
+
+
+/* ANIMAÇÃO DURANTE O DOWNLOAD */
+
+.download-progress.show .progress-fill {
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.35);
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 700px) {
+
+    .download-progress {
+        padding: 15px;
+    }
+
+
+    .progress-header span {
+        font-size: 11px;
+    }
+
+
+    #progress-percent {
+        font-size: 12px;
+    }
+
+}
+
+/* COMO FUNCIONA */
+
+.how-it-works {
+    padding: 90px 20px;
+
+    background: #0d0e12;
+
+    border-top: 1px solid #202127;
+}
+
+
+.section-title {
+    text-align: center;
+
+    margin-bottom: 50px;
+}
+
+
+.section-title span {
+    color: #ff3b30;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.section-title h2 {
+    margin-top: 12px;
+
+    font-size: 34px;
+}
+
+
+.steps {
+    max-width: 900px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+}
+
+
+.step {
+    padding: 25px;
+
+    background: #111217;
+
+    border: 1px solid #22242b;
+
+    border-radius: 12px;
+}
+
+
+.step-number {
+    color: #ff3b30;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+}
+
+
+.step h3 {
+    font-size: 17px;
+
+    margin-bottom: 10px;
+}
+
+
+.step p {
+    color: #858790;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* FOOTER */
+
+footer {
+    padding: 35px 7%;
+
+    border-top: 1px solid #202127;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+footer p {
+    color: #666871;
+
+    font-size: 12px;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 700px) {
+
+    .header {
+        padding: 0 20px;
+    }
+
+
+    nav {
+        display: none;
+    }
+
+
+    .hero {
+        padding-top: 55px;
+    }
+
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+
+    .download-box {
+        flex-direction: column;
+    }
+
+
+    .analyze-btn {
+        height: 50px;
+    }
+
+
+    .format-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .video-result {
+        align-items: flex-start;
+    }
+
+
+    .thumbnail {
+        width: 120px;
+        height: 75px;
+    }
+
+
+    .video-info h2 {
+        font-size: 14px;
+    }
+
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+
+    footer {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+}
