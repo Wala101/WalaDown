@@ -96,12 +96,12 @@ def criar_youtube(url, callback=None):
 
     except Exception as erro:
 
+        print("ERRO PYTUBEFIX:", repr(erro))
+
         raise HTTPException(
             status_code=400,
-            detail=f"Não foi possível acessar o vídeo: {erro}"
+            detail=str(erro)
         )
-
-
 # =========================================================
 # ATUALIZAR PROGRESSO
 # =========================================================

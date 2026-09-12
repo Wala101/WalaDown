@@ -1,6 +1,4 @@
-
 fastapi
 uvicorn[standard]
-pytubefix
+pytubefix==11.1.0
 python-multipart
-
